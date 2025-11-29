@@ -1,0 +1,18 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: image-service-monitor
+  labels:
+    app: image-service
+    release: kube-prom-stack
+spec:
+  selector:
+    matchLabels:
+      app: image-service
+  endpoints:
+  - port: http
+    path: /metrics
+    interval: 15s
+  namespaceSelector:
+    matchNames:
+    - image-service

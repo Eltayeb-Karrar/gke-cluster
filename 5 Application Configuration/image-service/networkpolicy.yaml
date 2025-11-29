@@ -16,3 +16,9 @@ spec:
       podSelector:
         matchLabels:
           app: api-service
+    - namespaceSelector:
+        matchLabels:
+          name: observability
+      podSelector:
+        matchLabels:
+          app.kubernetes.io/name: prometheus

@@ -11,5 +11,6 @@ resources:
 - configmap.yaml
 - ingress.yaml
 - certificate.yaml
+- servicemonitor.yaml
 components:
 - ../_Components/SharedSecrets

@@ -10,5 +10,6 @@ resources:
 - namespace.yaml
 - ingress.yaml
 - certificate.yaml
+- servicemonitor.yaml
 components:
 - ../_Components/SharedSecrets

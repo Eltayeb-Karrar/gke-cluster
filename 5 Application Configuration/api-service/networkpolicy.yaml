@@ -17,6 +17,12 @@ spec:
       podSelector:
         matchLabels:
           app.kubernetes.io/name: ingress-nginx
+    - namespaceSelector:
+        matchLabels:
+          name: observability
+      podSelector:
+        matchLabels:
+          app.kubernetes.io/name: prometheus
   egress:
   - to:
     - namespaceSelector:

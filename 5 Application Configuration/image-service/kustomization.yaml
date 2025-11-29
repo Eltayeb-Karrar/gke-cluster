@@ -8,5 +8,6 @@ resources:
 - horizontalpodautoscaler.yaml
 - networkpolicy.yaml
 - namespace.yaml
+- servicemonitor.yaml
 components:
 - ../_Components/SharedSecrets
