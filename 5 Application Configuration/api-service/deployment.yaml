@@ -44,11 +44,11 @@ spec:
           httpGet:
             path: /health/live
             port: 8000
-          initialDelaySeconds: 10
+          initialDelaySeconds: 30
           periodSeconds: 5
         readinessProbe:
           httpGet:
             path: /health/ready
             port: 8000
-          initialDelaySeconds: 5
+          initialDelaySeconds: 30
           periodSeconds: 3
