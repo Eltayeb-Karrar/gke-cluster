@@ -189,14 +189,17 @@ async def delete_customer(customer_id: str, current_user: dict = Depends(get_cur
 
 @app.get("/make-me-fail")
 async def make_me_fail():
+    logger.error("Ops something is wrong with DB connection")
     return JSONResponse(status_code=500, content={"detail": "Internal Server Error"})
 
 @app.get("/i-send-wrong")
 async def i_send_wrong():
+    logger.error("Ops You hit wrong Endpoint")
     return JSONResponse(status_code=400, content={"detail": "Internal Server Error"})
 
 @app.get("/go-sleep")
 async def go_sleep():
+    logger.error("Ops You can't divide by zero")
     a = 1 /0
     return "See me if you can"
 
