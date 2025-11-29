@@ -1,0 +1,14 @@
+kube-prometheus-stack:
+  grafana:
+    enabled: true
+    ingress:
+      enabled: true
+      ingressClassName: nginx
+      hosts:
+      - grafana.eltayeb.online
+      tls:
+      - secretName: grafana-tls
+        hosts:
+        - grafana.eltayeb.online
+  alertmanager:
+    enabled: true

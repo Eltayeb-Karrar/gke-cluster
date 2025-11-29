@@ -1,0 +1,51 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: api-service-network-policy
+spec:
+  podSelector:
+    matchLabels:
+      app: api-service
+  policyTypes:
+  - Ingress
+  - Egress
+  ingress:
+  - from:
+    - namespaceSelector:
+        matchLabels:
+          name: ingress-nginx
+      podSelector:
+        matchLabels:
+          app.kubernetes.io/name: ingress-nginx
+  egress:
+  - to:
+    - namespaceSelector:
+        matchLabels:
+          name: mongodb
+      podSelector:
+        matchLabels:
+          app: mongodb
+  - to:
+    - namespaceSelector:
+        matchLabels:
+          name: iam-service
+      podSelector:
+        matchLabels:
+          app: iam-service
+  - to:
+    - namespaceSelector:
+        matchLabels:
+          name: image-service
+      podSelector:
+        matchLabels:
+          app: image-service
+  - to:
+    - namespaceSelector:
+        matchLabels:
+          kubernetes.io/metadata.name: kube-system
+      podSelector:
+        matchLabels:
+          k8s-app: kube-dns
+    ports:
+    - protocol: UDP
+      port: 53

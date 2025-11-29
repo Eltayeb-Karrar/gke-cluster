@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: api-service-config
+  namespace: api-service
+data:
+  IAM_SERVICE_URL: http://iam-service.iam-service.svc.cluster.local
+  IMAGE_SERVICE_URL: http://image-service.image-service.svc.cluster.local

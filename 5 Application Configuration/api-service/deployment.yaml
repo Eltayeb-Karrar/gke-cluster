@@ -1,0 +1,54 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: api-service
+  template:
+    metadata:
+      labels:
+        app: api-service
+    spec:
+      containers:
+      - name: api-service
+        image: europe-west1-docker.pkg.dev/thmanyah-assessment/thm-assessment/assessment-api-service:latest
+        ports:
+        - containerPort: 8000
+        env:
+        - name: MONGO_URI
+          valueFrom:
+            secretKeyRef:
+              name: cluster-secret-store
+              key: MONGO_URI_API
+        - name: IAM_SERVICE_URL
+          valueFrom:
+            configMapKeyRef:
+              name: api-service-config
+              key: IAM_SERVICE_URL
+        - name: IMAGE_SERVICE_URL
+          valueFrom:
+            configMapKeyRef:
+              name: api-service-config
+              key: IMAGE_SERVICE_URL
+        resources:
+          limits:
+            cpu: "200m"
+            memory: "256Mi"
+          requests:
+            cpu: "100m"
+            memory: "128Mi"
+        livenessProbe:
+          httpGet:
+            path: /health/live
+            port: 8000
+          initialDelaySeconds: 10
+          periodSeconds: 5
+        readinessProbe:
+          httpGet:
+            path: /health/ready
+            port: 8000
+          initialDelaySeconds: 5
+          periodSeconds: 3

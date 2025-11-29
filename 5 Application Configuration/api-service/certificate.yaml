@@ -1,0 +1,12 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: api-eltayeb-online-certificate
+  namespace: api-service
+spec:
+  secretName: api-eltayeb-online-tls
+  issuerRef:
+    name: letsencrypt-prod-dns01
+    kind: ClusterIssuer
+  dnsNames:
+  - api.eltayeb.online
