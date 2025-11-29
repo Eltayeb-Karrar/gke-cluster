@@ -3,6 +3,7 @@ const multer = require('multer');
 const { v4: uuidv4 } = require('uuid');
 const { Storage } = require('@google-cloud/storage');
 const logger = require('./logger');
+const promBundle = require('express-prom-bundle');
 
 const app = express();
 const port = 3002;
@@ -28,6 +29,8 @@ const upload = multer({
         fileSize: 5 * 1024 * 1024, // no larger than 5mb
     },
 });
+
+app.use(promBundle({includeMethod: true, includePath: true}));
 
 // Request logging middleware
 app.use((req, res, next) => {

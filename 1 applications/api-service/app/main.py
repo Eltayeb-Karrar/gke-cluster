@@ -50,7 +50,11 @@ class Customer(MongoModel):
     phone: str
     photo: str
 
+from prometheus_fastapi_instrumentator import Instrumentator
+
 app = FastAPI()
+
+Instrumentator().instrument(app).expose(app)
 
 # Middleware to log requests and responses
 @app.middleware("http")

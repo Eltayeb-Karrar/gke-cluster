@@ -12,3 +12,10 @@ kube-prometheus-stack:
         - grafana.eltayeb.online
   alertmanager:
     enabled: true
+  prometheus:
+    prometheusSpec:
+      serviceMonitorNamespaceSelector: {} 
+      serviceMonitorSelector: {}
+      podMonitorNamespaceSelector: {}
+      podMonitorSelector: {}
+      

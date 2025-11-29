@@ -4,6 +4,7 @@ const jwt = require('jsonwebtoken');
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const logger = require('./logger');
+const promBundle = require('express-prom-bundle');
 
 const app = express();
 const port = 3001;
@@ -22,6 +23,7 @@ const UserSchema = new mongoose.Schema({
 const User = mongoose.model('User', UserSchema);
 
 app.use(bodyParser.json());
+app.use(promBundle({includeMethod: true, includePath: true}));
 
 // Request logging middleware
 app.use((req, res, next) => {
